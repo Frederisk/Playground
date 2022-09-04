@@ -27,7 +27,7 @@ jobs:
           $7z = Get-Command -Name '7z' -ErrorAction SilentlyContinue;
           Write-Host -Message "7z in PATH? $($null -ne $7z)" | Out-Null;
           if ($null -ne $7z) {
-            $7z | Out-String | Out-Null;
+            $7z | Out-Host | Out-Null;
           }
           $7z = Get-Command -Name "$env:ProgramFiles\7-Zip-Zstandard\7z.exe" -ErrorAction SilentlyContinue;
           Write-Host -Message "7z in ProgramFiles? $($null -ne $7z)" | Out-Null;
