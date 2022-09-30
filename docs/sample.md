@@ -1,9 +1,9 @@
 # Hello and Fuck you
 
 ```powershell
-hello
+using namespace System;
 ```
 
 ```haxe
-hello
+using
 ```
