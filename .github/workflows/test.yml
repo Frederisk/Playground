@@ -1,33 +1,53 @@
-name: PowerShell Test
+name: Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  install-7z:
-    name: 7z-zstd
-    runs-on: windows-latest
+  docker-test:
+    name: Docker Test
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Show System Info
-        shell: pwsh
+
+      - name: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: rowe/tmp
+      - name: print
+        shell: bash
         run: |
-          Write-Host -Message "pws: $pws";
-          $PSVersionTable | Out-Host | Out-Null;
-          Get-ChildItem -Path .\
-      - name: Install 7z-zstd
-        shell: pwsh
-        run: |
-          Invoke-WebRequest -Uri 'https://github.com/mcmilk/7-Zip-zstd/releases/download/v21.03-v1.5.0-R2/7z21.03-zstd-x64.exe' -OutFile .\out.exe
-          .\out.exe /S
-      - name: Check 7z-zstd
-        shell: pwsh
-        run: |
-          $7z = Get-Command -Name '7z' -ErrorAction SilentlyContinue;
-          Write-Host -Message "7z in PATH? $($null -ne $7z)" | Out-Null;
-          if ($null -ne $7z) {
-            $7z | Out-Host | Out-Null;
-          }
-          $7z = Get-Command -Name "$env:ProgramFiles\7-Zip-Zstandard\7z.exe" -ErrorAction SilentlyContinue;
-          Write-Host -Message "7z in ProgramFiles? $($null -ne $7z)" | Out-Null;
+          echo '${{ steps.meta.outputs.labels }}'
+          echo '------'
+          echo '${{ steps.meta.outputs.tags }}'
+
+
+# jobs:
+#   install-7z:
+#     name: 7z-zstd
+#     runs-on: windows-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+#       - name: Show System Info
+#         shell: pwsh
+#         run: |
+#           Write-Host -Message "pws: $pws";
+#           $PSVersionTable | Out-Host | Out-Null;
+#           Get-ChildItem -Path .\
+#       - name: Install 7z-zstd
+#         shell: pwsh
+#         run: |
+#           Invoke-WebRequest -Uri 'https://github.com/mcmilk/7-Zip-zstd/releases/download/v21.03-v1.5.0-R2/7z21.03-zstd-x64.exe' -OutFile .\out.exe
+#           .\out.exe /S
+#       - name: Check 7z-zstd
+#         shell: pwsh
+#         run: |
+#           $7z = Get-Command -Name '7z' -ErrorAction SilentlyContinue;
+#           Write-Host -Message "7z in PATH? $($null -ne $7z)" | Out-Null;
+#           if ($null -ne $7z) {
+#             $7z | Out-Host | Out-Null;
+#           }
+#           $7z = Get-Command -Name "$env:ProgramFiles\7-Zip-Zstandard\7z.exe" -ErrorAction SilentlyContinue;
+#           Write-Host -Message "7z in ProgramFiles? $($null -ne $7z)" | Out-Null;
