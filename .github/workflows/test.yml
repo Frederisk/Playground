@@ -15,6 +15,9 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: rowe/tmp
+          labels: |
+            org.opencontainers.image.title=MyCustomTitle
+
       - name: print
         shell: bash
         run: |
