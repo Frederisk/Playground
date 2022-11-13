@@ -7,26 +7,46 @@ on:
       - published
 
 jobs:
-  docker-test:
-    name: Docker Test
+  gpu-ci:
+    name: CI with GPU
     runs-on: ubuntu-latest
+    # if: ${{ githu }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: rowe/tmp
-          labels: |
-            org.opencontainers.image.title=MyCustomTitle
+      - name: Setup Python
+        uses: actions/setup-python@v4
 
-      - name: print
-        shell: bash
-        run: |
-          echo '${{ steps.meta.outputs.labels }}'
-          echo '------'
-          echo '${{ steps.meta.outputs.tags }}'
+      - name: GPU ssh
+        uses: lvyufeng/action-kaggle-gpu-test@latest
+        with:
+          kaggle_username: ${{ secrets.KAGGLE_USERNAME }}
+          kaggle_key: ${{ secrets.KAGGLE_TOKEN }}
+          kernel_name: TestKernelCI
+          kernel_job_file: scripts\gpu_runner.py
+
+# jobs:
+#   docker-test:
+#     name: Docker Test
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+
+#       - name: meta
+#         uses: docker/metadata-action@v4
+#         with:
+#           images: rowe/tmp
+#           labels: |
+#             org.opencontainers.image.title=MyCustomTitle
+
+#       - name: print
+#         shell: bash
+#         run: |
+#           echo '${{ steps.meta.outputs.labels }}'
+#           echo '------'
+#           echo '${{ steps.meta.outputs.tags }}'
 
 
 # jobs:
