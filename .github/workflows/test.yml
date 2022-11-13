@@ -7,24 +7,41 @@ on:
       - published
 
 jobs:
-  gpu-ci:
-    name: CI with GPU
+  kaggle-ci:
+    name: kaggle Action
     runs-on: ubuntu-latest
-    # if: ${{ githu }}
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-
-      - name: GPU ssh
-        uses: lvyufeng/action-kaggle-gpu-test@latest
+      - name: Test
+        uses: Frederisk/kaggle-action@v0.0.1-alpha
         with:
-          kaggle_username: ${{ secrets.KAGGLE_USERNAME }}
-          kaggle_key: ${{ secrets.KAGGLE_TOKEN }}
-          kernel_name: TestKernelCI
-          kernel_job_file: scripts/gpu_runner.py
+          username: ${{ secrets.KAGGLE_USERNAME }}
+          key: ${{ secrets.KAGGLE_TOKEN }}
+          title: KaggleTestCI
+          code_file: scripts/gpu_runner.ipy
+
+
+# jobs:
+#   gpu-ci:
+#     name: CI with GPU
+#     runs-on: ubuntu-latest
+#     # if: ${{ githu }}
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+
+#       - name: Setup Python
+#         uses: actions/setup-python@v4
+
+#       - name: GPU ssh
+#         uses: lvyufeng/action-kaggle-gpu-test@latest
+#         with:
+#           kaggle_username: ${{ secrets.KAGGLE_USERNAME }}
+#           kaggle_key: ${{ secrets.KAGGLE_TOKEN }}
+#           kernel_name: TestKernelCI
+#           kernel_job_file: scripts/gpu_runner.py
 
 # jobs:
 #   docker-test:
