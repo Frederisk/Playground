@@ -24,7 +24,7 @@ jobs:
           kaggle_username: ${{ secrets.KAGGLE_USERNAME }}
           kaggle_key: ${{ secrets.KAGGLE_TOKEN }}
           kernel_name: TestKernelCI
-          kernel_job_file: scripts\gpu_runner.py
+          kernel_job_file: scripts/gpu_runner.py
 
 # jobs:
 #   docker-test:
