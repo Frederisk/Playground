@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Test
-        uses: Frederisk/kaggle-action@v0.0.1-alpha
+        uses: Frederisk/kaggle-action@v0.0.2-alpha
         with:
           username: ${{ secrets.KAGGLE_USERNAME }}
           key: ${{ secrets.KAGGLE_TOKEN }}
