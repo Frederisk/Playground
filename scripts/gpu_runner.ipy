@@ -7,7 +7,7 @@ status = os.system('command -V docker')
 # if status:
 #     raise Exception('docker NOT FOUND!')
 
-!ls
-!apt update
+# !ls
+# !apt update
 # raise Exception('Force Failed!')
 # os.system('command -V ')
