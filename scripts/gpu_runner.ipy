@@ -4,8 +4,8 @@ print('Hello World!')
 
 status = os.system('command -V docker')
 
-# if status:
-#     raise Exception('docker NOT FOUND!')
+if status:
+    raise Exception('docker NOT FOUND!')
 
 # !ls
 # !apt update
